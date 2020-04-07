@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzeria Korona </title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+    <h1> Przygotuj swoją pizze</h1>
+    <img th:src="@{/images/PizzaLogo.png}" />
+    <form method="POST" th:object="${design}">
+
+        <span class="validationError"
+              th:if="${#fields.hasErrors('ingredients')}"
+              th:errors="*{ingredients}">Ingredient Error
+        </span>
+
+        <div class="grid">
+            <div class="ingredient-group" id="ciasto">
+                <h3> Wybierz rodzaj mąki:</h3>
+                <div th:each="ingredient : ${ciasto}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">SKŁADNIK </span>
+                    <br/>
+                </div>
+            </div>
+
+            <div class="ingredient-group" id="mieso">
+                <h3> Wybierz rodzaj mięsa:</h3>
+                <div th:each="ingredient : ${mieso}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">SKŁADNIK </span>
+                    <br/>
+                </div>
+            </div>
+
+            <div class="ingredient-group" id="grubosc">
+                <h3> Wybierz grubość:</h3>
+                <div th:each="ingredient : ${grubosc}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">SKŁADNIK </span>
+                    <br/>
+                </div>
+            </div>
+
+            <div class="ingredient-group" id="ser">
+                <h3> Wybierz rodzaj sera:</h3>
+                <div th:each="ingredient : ${ser}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">SKŁADNIK </span>
+                    <br/>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3>Nadaj nazwę pizzy:</h3>
+            <input type="text" th:field="*{name}"/>
+             <span class="validationError"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">
+
+             </span>
+            <br/>
+            <button>Wyślij zamówienie</button>
+        </div>
+
+
+    </form>
+
+
+
+</body>
+</html>
